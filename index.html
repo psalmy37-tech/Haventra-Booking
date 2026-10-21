@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a Viewing | Haventra Real Estate</title>
+<meta name="description" content="Book an in-person or virtual property viewing with Haventra Real Estate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#bookingForm">Skip to booking form</a>
+
+<header class="site-header">
+  <div class="bar">
+    <img class="logo" src="assets/logo.png" alt="Haventra Real Estate logo" width="80" height="64">
+    <a class="wa-btn" id="hdrWa" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 20l1.3-4.2A8 8 0 1 1 8.300 18.800L4 20z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 9.500c.5 2.500 2.500 4.500 5.500 5.500l1.200-1.300-1.800-1-.9.700c-.9-.4-1.700-1.200-2.100-2.100l.7-.9-1-1.800L9 9.500z"/></svg>
+      <span class="wa-label">WhatsApp / Call</span>
+    </a>
+  </div>
+</header>
+
+<section class="intro">
+  <h1>Book your property inspection</h1>
+  <p>Choose a time that works for you. We will confirm with you on WhatsApp or by phone.</p>
+  <p class="intro-hours" id="introHours">Opening hours loading…</p>
+</section>
+
+<main class="layout">
+  <div class="main-col">
+    <div id="loadError" class="notice error" role="alert" hidden>
+      <p><strong>We couldn't load the booking form.</strong> Check your connection and try again, or message us on WhatsApp.</p>
+      <div class="row">
+        <button type="button" class="btn-sec" id="retryBtn">Retry</button>
+        <a class="btn-sec" id="errWa" href="#" target="_blank" rel="noopener">Message us on WhatsApp</a>
+      </div>
+    </div>
+
+    <form id="bookingForm" class="card loading" novalidate>
+      <div id="formAlert" class="notice error" role="alert" tabindex="-1" hidden></div>
+
+      <fieldset class="group" id="grpA">
+        <legend>1. Viewing details</legend>
+        <div class="field">
+          <span class="label" id="lblType">Viewing type <b aria-hidden="true">*</b></span>
+          <div class="type-cards" role="radiogroup" aria-labelledby="lblType" aria-describedby="err-type" id="typeGroup">
+            <label class="type-card"><input type="radio" name="vtype" value="In-person" required>
+              <span class="tc-body">
+                <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/></svg>
+                <strong>In-person viewing</strong><small>About 1 hour</small></span></label>
+            <label class="type-card"><input type="radio" name="vtype" value="Virtual">
+              <span class="tc-body">
+                <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 7h12v10H3zM15 11l6-3v8l-6-3"/></svg>
+                <strong>Virtual viewing</strong><small>30-minute video call</small></span></label>
+          </div>
+          <p class="err" id="err-type" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label class="label" for="property">Property <b aria-hidden="true">*</b></label>
+          <select id="property" name="property" required aria-describedby="err-property"><option value="">Select a property</option></select>
+          <p class="err" id="err-property" aria-live="polite"></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="group" id="grpB">
+        <legend>2. Date and time</legend>
+        <div class="field">
+          <span class="label" id="lblDate">Preferred date <b aria-hidden="true">*</b></span>
+          <div class="cal" id="cal" role="group" aria-labelledby="lblDate" aria-describedby="err-date" tabindex="-1"></div>
+          <p class="hint" id="dateHint"></p>
+          <p class="err" id="err-date" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <span class="label" id="lblTime">Preferred time <b aria-hidden="true">*</b></span>
+          <p class="hint" id="timeHint">Choose a viewing type and date first.</p>
+          <div class="chips" id="times" role="radiogroup" aria-labelledby="lblTime" aria-describedby="err-time" tabindex="-1"></div>
+          <p class="err" id="err-time" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label class="label" for="altDate">Alternative date <span class="opt">(optional)</span></label>
+          <input type="date" id="altDate" name="altDate" aria-describedby="err-altDate">
+          <p class="hint">Date only. We will use it if your first choice doesn't work.</p>
+          <p class="err" id="err-altDate" aria-live="polite"></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="group" id="grpC">
+        <legend>3. Your details</legend>
+        <div class="field">
+          <label class="label" for="name">Full name <b aria-hidden="true">*</b></label>
+          <input type="text" id="name" name="name" autocomplete="name" maxlength="100" required aria-describedby="err-name">
+          <p class="err" id="err-name" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label class="label" for="phone">WhatsApp number <b aria-hidden="true">*</b></label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="08012345678 or +2348012345678" required aria-describedby="err-phone">
+          <p class="err" id="err-phone" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label class="label" for="email">Email <b aria-hidden="true">*</b></label>
+          <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="hint-email err-email">
+          <p class="hint" id="hint-email">A backup contact. We won't send you emails.</p>
+          <p class="err" id="err-email" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label class="label" for="people">Number of people <b aria-hidden="true">*</b></label>
+          <div class="stepper">
+            <button type="button" id="pMinus" aria-label="Decrease number of people">−</button>
+            <input type="number" id="people" name="people" value="1" min="1" max="10" inputmode="numeric" required aria-describedby="err-people">
+            <button type="button" id="pPlus" aria-label="Increase number of people">+</button>
+          </div>
+          <p class="err" id="err-people" aria-live="polite"></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="group" id="grpD">
+        <legend>4. Anything else?</legend>
+        <div class="field">
+          <label class="label" for="message">Message or special requests <span class="opt">(optional)</span></label>
+          <textarea id="message" name="message" rows="4" maxlength="500" aria-describedby="msgCount err-message"></textarea>
+          <p class="hint counter" id="msgCount" aria-live="off">0 / 500</p>
+          <p class="err" id="err-message" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label class="check"><input type="checkbox" id="consent" name="consent" required aria-describedby="err-consent">
+            <span>I agree to be contacted about this booking. <b aria-hidden="true">*</b></span></label>
+          <p class="err" id="err-consent" aria-live="polite"></p>
+        </div>
+        <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button type="submit" class="btn-book" id="submitBtn"><span class="spin" aria-hidden="true"></span><span id="submitLabel">Book Viewing</span></button>
+      </fieldset>
+    </form>
+
+    <section id="success" class="card success" hidden tabindex="-1" aria-live="polite"></section>
+  </div>
+
+  <aside class="info" aria-label="Viewing information">
+    <h2>Opening hours</h2>
+    <ul class="plain" id="infoHours"><li>Loading…</li></ul>
+    <h2>Viewing types</h2>
+    <ul class="plain">
+      <li><strong>In-person viewing</strong> takes about 1 hour.</li>
+      <li><strong>Virtual viewing</strong> is a 30-minute video call.</li>
+    </ul>
+    <h2>Good to know</h2>
+    <ul class="ticks">
+      <li>Free viewing, no obligation.</li>
+      <li>Virtual option available.</li>
+      <li>We will confirm your booking by WhatsApp or phone.</li>
+    </ul>
+    <p class="call">Prefer to talk? <a id="infoTel" href="#"></a></p>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="foot-in">
+    <div class="foot-logo"><img src="assets/logo.png" alt="Haventra Real Estate logo" width="96" height="76"></div>
+    <div>
+      <p class="foot-name" id="fAgency"></p>
+      <p><a id="fTel" href="#"></a></p>
+      <p><a id="fMail" href="#"></a></p>
+      <p id="fAddr"></p>
+      <ul class="social" id="fSocial"></ul>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
